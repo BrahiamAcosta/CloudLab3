@@ -63,7 +63,7 @@ serverless (se despliega en AWS) y `frontend/` es la SPA de React que consume la
 
 ## 3. La entidad: Libro
 
-Para el desarrollo de este laboratorio se opto por trabajar con la entidad libro, y crear un sistema similar a una biblioteca.
+Para el desarrollo de este laboratorio se optó por trabajar con la entidad libro, y crear un sistema similar a una biblioteca.
 Cada libro tiene **6 atributos de negocio** (más 2 generados por el sistema), superando el mínimo de 4 exigidos.
 
 | Atributo          | Tipo    | Obligatorio | Notas                                                             |
