@@ -22,7 +22,6 @@ El sistema expone una API que administra el catálogo de libros de una bibliotec
 
 ```
 CloudLab3/
-├── NEWREADME.md
 ├── README.md
 ├── AWS Serverless.postman_collection.json
 ├── .gitignore
