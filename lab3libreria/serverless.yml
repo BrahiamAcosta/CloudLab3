@@ -1,0 +1,129 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: cloud202602
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: libreria
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: lab3libreria
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+  region: us-east-1
+  environment:
+    LIBROS_TABLE: ${self:service}-libros-${sls:stage}
+
+  httpApi:
+    cors:
+      allowedOrigins:
+        - "*"
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - PATCH
+        - DELETE
+      allowedHeaders:
+        - Content-Type
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:GetItem
+            - dynamodb:Scan
+            - dynamodb:Query
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt:
+                - LibrosTable
+                - Arn
+            - Fn::Join:
+                - "/"
+                - - Fn::GetAtt: [LibrosTable, Arn]
+                  - "index/AutorIndex"
+
+functions:
+  crear:
+    handler: handler.crear
+    events:
+      - httpApi:
+          path: /libros
+          method: post
+
+  listar:
+    handler: handler.listar
+    events:
+      - httpApi:
+          path: /libros
+          method: get
+
+  obtener:
+    handler: handler.obtener
+    events:
+      - httpApi:
+          path: /libros/{id}
+          method: get
+
+  buscarPorAutor:
+    handler: handler.buscarPorAutor
+    events:
+      - httpApi:
+          path: /libros/autor/{autor}
+          method: get
+
+  parcial:
+    handler: handler.parcial
+    events:
+      - httpApi:
+          path: /libros/{id}
+          method: patch
+
+  actualizar:
+    handler: handler.actualizar
+    events:
+      - httpApi:
+          path: /libros/{id}
+          method: put
+
+  eliminar:
+    handler: handler.eliminar
+    events:
+      - httpApi:
+          path: /libros/{id}
+          method: delete
+
+resources:
+  Resources:
+    LibrosTable:
+      Type: AWS::DynamoDB::Table
+
+      Properties:
+        TableName: ${self:provider.environment.LIBROS_TABLE}
+
+        BillingMode: PAY_PER_REQUEST
+
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+
+          - AttributeName: autor
+            AttributeType: S
+
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+
+        GlobalSecondaryIndexes:
+          - IndexName: AutorIndex
+            KeySchema:
+              - AttributeName: autor
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+
+plugins:
+  - serverless-offline

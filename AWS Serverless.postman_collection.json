@@ -1,0 +1,235 @@
+{
+  "info": {
+    "_postman_id": "9d2deb93-9927-4688-9eb2-6a8db3b19041",
+    "name": "AWS Serverless",
+    "description": "This collection provides requests for testing and managing a serverless book API hosted on AWS. It covers the complete lifecycle of book records, including listing all books, retrieving a book by ID, searching by author, creating new books, updating records fully or partially, and deleting books.\n\nAll requests use the `{{baseURL}}` variable, allowing the collection to run against different deployment environments without changing individual endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "35063341"
+  },
+  "item": [
+    {
+      "name": "GET ALL",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseURL}}/libros",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "libros"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET ONE",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseURL}}/libros/466b6bef-1495-4367-8d32-def1085abcd1",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "libros",
+            "466b6bef-1495-4367-8d32-def1085abcd1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET BY AUTOR",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseURL}}/libros/autor/Gabriel García Márquez",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "libros",
+            "autor",
+            "Gabriel García Márquez"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST LIBRO",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"titulo\": \"Ficciones\",\r\n    \"autor\": \"Jorge Luis Borges\",\r\n    \"isbn\": \"978-8497593373\",\r\n    \"anioPublicacion\": 1944,\r\n    \"genero\": \"Cuento / Ficción filosófica\",\r\n    \"disponible\": true\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/libros",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "libros"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT LIBRO",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"titulo\": \"El Principito\",\r\n    \"autor\": \"Antoine de Saint-Exupéry\",\r\n    \"isbn\": \"978-0156013987\",\r\n    \"anioPublicacion\": 1943,\r\n    \"genero\": \"Literatura infantil / Filosofía\",\r\n    \"disponible\": false\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/libros/d8ee9891-9a9b-46af-ac69-ffe8c113252e",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "libros",
+            "d8ee9891-9a9b-46af-ac69-ffe8c113252e"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH LIBRO",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"disponible\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/libros/d8ee9891-9a9b-46af-ac69-ffe8c113252e",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "libros",
+            "d8ee9891-9a9b-46af-ac69-ffe8c113252e"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE LIBRO",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseURL}}/libros/d8ee9891-9a9b-46af-ac69-ffe8c113252e",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "libros",
+            "d8ee9891-9a9b-46af-ac69-ffe8c113252e"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": ""
+    }
+  ]
+}
