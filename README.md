@@ -12,7 +12,6 @@ El sistema expone una API que administra el catálogo de libros de una bibliotec
 - **Búsqueda por autor** mediante un _Global Secondary Index_ (GSI) `AutorIndex` con `QueryCommand` en lugar de `Scan`.
 - **Actualización parcial** (`PATCH`) que solo modifica los campos enviados.
 - **Paginación** en el listado mediante `limit` y `lastKey` (`LastEvaluatedKey`).
-- **Permisos IAM de mínimo privilegio**: las Lambdas solo pueden operar sobre su propia tabla y su índice.
 - **CORS habilitado** para que el frontend pueda consumir la API desde el navegador.
 - **Frontend React** que consume la API real desplegada en AWS.
 
